@@ -28,7 +28,6 @@ class SendHrsForm extends Component {
     )
       return true;
     return false;
-    // return (this.state.sendingType && (this.state.fields.user || this.state.fields.service));
   };
 
   handleSubmit = () => {
@@ -187,5 +186,7 @@ class ServicesDropdown extends Component {
     );
   }
 }
+
+export { ServicesDropdown, UsersDropdown };
 
 export default SendHrsForm;
