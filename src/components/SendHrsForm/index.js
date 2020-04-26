@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
+import SendHrsToUser from "./SendHrsToUser";
 
-import SendHrsToUser from './SendHrsToUser';
-
-const SendHrsForm = (props) => 
-      <SendHrsToUser />
+const SendHrsForm = (props) => <SendHrsToUser />;
 
 export default SendHrsForm;

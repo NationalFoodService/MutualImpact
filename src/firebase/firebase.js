@@ -11,7 +11,7 @@ const config = {
   storageBucket: "hours-website1.appspot.com",
   messagingSenderId: "575700657945",
   appId: "1:575700657945:web:4c4c39c1ba891293130788",
-  measurementId: "G-JWJ9ER7BE3"
+  measurementId: "G-JWJ9ER7BE3",
 };
 
 if (!firebase.apps.length) firebase.initializeApp(config);

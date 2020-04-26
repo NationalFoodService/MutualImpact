@@ -3,8 +3,8 @@ import { Icon } from "semantic-ui-react";
 
 import { db } from "../../firebase";
 import LoadingCardView from "../LoadingCardView";
-import OrganisationFeed from '../OrganisationFeed';
-import { getImageSize } from '../../helpers';
+import OrganisationFeed from "./OrganisationFeed";
+import { getImageSize } from "../../helpers";
 
 class OrganisationPage extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class OrganisationPage extends React.Component {
     hoursGenerated: null,
     mealsProvided: null,
     loading: true,
-    photo: null
+    photo: null,
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class OrganisationPage extends React.Component {
           mealsProvided,
           description,
           photo,
-          loading: false
+          loading: false,
         });
       }
     );
@@ -35,11 +35,11 @@ class OrganisationPage extends React.Component {
   render() {
     const match = this.props.match;
     const meta = [];
-    if ( this.state.hoursGenerated ) {
-      meta.push( `${ this.state.hoursGenerated } people helped` );
+    if (this.state.hoursGenerated) {
+      meta.push(`${this.state.hoursGenerated} people helped`);
     }
-    if ( this.state.mealsProvided ) {
-      meta.push( `${ this.state.mealsProvided } meals provided` );
+    if (this.state.mealsProvided) {
+      meta.push(`${this.state.mealsProvided} meals provided`);
     }
     return (
       <Fragment>
@@ -47,8 +47,8 @@ class OrganisationPage extends React.Component {
           loading={this.state.loading}
           header={this.state.name || ""}
           description={this.state.description}
-          meta={ meta.join(', ')}
-          image={ getImageSize( this.state.photo, 'square_md' ) }
+          meta={meta.join(", ")}
+          image={getImageSize(this.state.photo, "square_md")}
           extra={
             <Fragment>
               <Icon name="group" />

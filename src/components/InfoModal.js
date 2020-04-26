@@ -16,7 +16,7 @@ const infoPanes = [
   {
     header: `Mutual impact`,
     text: `Mutual impact is a web app for groups to post impact at the end of the day or week. Having more information during COVID-19 gives each group more context, which helps us carry out work more effectively. It also supports researchers to compile evidence for to government to unlock support.`,
-    image: aboutUs
+    image: aboutUs,
   },
   {
     header: `How it works`,
@@ -27,32 +27,34 @@ const infoPanes = [
         <Header content="Post your impact" size="small" />
         <p>Post your impact on the newsfeed.</p>
         <Header content="Evidence impact." size="small" />
-        <p>We hope this tool will provide an easy framework for mutualist groups to
-        achieve support for their work.</p>
+        <p>
+          We hope this tool will provide an easy framework for mutualist groups
+          to achieve support for their work.
+        </p>
       </Fragment>
     ),
 
-    image: howItWorks
+    image: howItWorks,
   },
   {
     header: `How to post impact`,
     text: `Click log impact. Post your general stats such as the number of people you helped and how you helped them. Include as much as you can but don't post any sensitive information! Duh! `,
-    image: logHours
+    image: logHours,
   },
   {
     header: `Real time transparency`,
     text: ` Keep it updated and get your team to post as often as you can. Try not to repeat information! Check your groups total in the search bar and you will quickly be surprised!`,
-    image: keepTrack
+    image: keepTrack,
   },
   {
     header: `Share`,
     text: `People can see how you are doing. This allows organisations, individuals, and municipals to work out how to best support you.`,
-    image: spendHours
+    image: spendHours,
   },
   {
     header: `Share`,
     text: `As a novel feature, you can send impact to an individual as a token of gratitude. We are developing these features as the project evolves. `,
-    image: exchangeHours
+    image: exchangeHours,
   },
   {
     header: `Our supporters and partners`,
@@ -62,46 +64,44 @@ const infoPanes = [
         <Header content="Who is making this" size="small" />
         <p>
           This system is designed by members of the National Food Service
-          campaign, a grassroots network to end food insecurity in the U.K. We are
-          looking for more contributors, so if you would like to help build this
-          app or for more information visit the
-          {" "}
+          campaign, a grassroots network to end food insecurity in the U.K. We
+          are looking for more contributors, so if you would like to help build
+          this app or for more information visit the{" "}
           <a href="https://www.nationalfoodservice.uk/">
-
             National Food Service website
           </a>
         </p>
       </Fragment>
     ),
 
-    image: supporters
-  }
+    image: supporters,
+  },
 ];
 
 class InfoGallery extends Component {
   state = {
-    activeIndex: 0
+    activeIndex: 0,
   };
 
   onLeftClick = () =>
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.activeIndex < 1)
         return {
-          activeIndex: this.props.panes.length - 1
+          activeIndex: this.props.panes.length - 1,
         };
       return {
-        activeIndex: prevState.activeIndex - 1
+        activeIndex: prevState.activeIndex - 1,
       };
     });
 
   onRightClick = () =>
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.activeIndex > this.props.panes.length - 2)
         return {
-          activeIndex: 0
+          activeIndex: 0,
         };
       return {
-        activeIndex: prevState.activeIndex + 1
+        activeIndex: prevState.activeIndex + 1,
       };
     });
 
@@ -110,7 +110,7 @@ class InfoGallery extends Component {
   render() {
     const { panes } = this.props;
     const { activeIndex } = this.state;
-    const pane = panes[ activeIndex ];
+    const pane = panes[activeIndex];
     return (
       <Grid
         as={Swipeable}
@@ -124,7 +124,7 @@ class InfoGallery extends Component {
           </Grid.Column>
           <Grid.Column width={6} stretched>
             <Header content={pane.header} size="huge" />
-            {typeof pane.text === 'string' ? <p>{ pane.text }</p> : pane.text}
+            {typeof pane.text === "string" ? <p>{pane.text}</p> : pane.text}
           </Grid.Column>
           <Grid.Column width={6} verticalAlign="middle">
             <Image src={pane.image} />
@@ -156,7 +156,7 @@ class InfoGallery extends Component {
 class InfoModal extends Component {
   state = {
     modalOpen: false,
-    wasSignedIn: false
+    wasSignedIn: false,
   };
 
   handleOpen = () => this.setState({ modalOpen: true });
@@ -202,7 +202,7 @@ class InfoModal extends Component {
 
 const InfoModalWithUser = () => (
   <FirebaseAuthUserContext.Consumer>
-    {user => <InfoModal user={user} />}
+    {(user) => <InfoModal user={user} />}
   </FirebaseAuthUserContext.Consumer>
 );
 

@@ -1,36 +1,35 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-function timeSince( date ) {
+function timeSince(date) {
+  var seconds = Math.floor((Date.now() - date) / 1000);
 
-    var seconds = Math.floor((Date.now() - date) / 1000);
+  var interval = Math.floor(seconds / 31536000);
 
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
-        return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-        return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-        return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-        return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-        return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
+  if (interval > 1) {
+    return interval + " years";
+  }
+  interval = Math.floor(seconds / 2592000);
+  if (interval > 1) {
+    return interval + " months";
+  }
+  interval = Math.floor(seconds / 86400);
+  if (interval > 1) {
+    return interval + " days";
+  }
+  interval = Math.floor(seconds / 3600);
+  if (interval > 1) {
+    return interval + " hours";
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval > 1) {
+    return interval + " minutes";
+  }
+  return Math.floor(seconds) + " seconds";
 }
 
 const eventLogMapper = {
-  SEND_TOKENS: eventItem => {
+  SEND_TOKENS: (eventItem) => {
     const { docId: id, details, dateCreated } = eventItem;
     const hours = details.amount;
     const description = details.description || "";
@@ -46,10 +45,10 @@ const eventLogMapper = {
         </Fragment>
       ),
       date: timeSince(dateCreated),
-      extra: description
+      extra: description,
     };
   },
-  APPROVE_TOKENS: eventItem => {
+  APPROVE_TOKENS: (eventItem) => {
     const { docId: id, details, dateCreated } = eventItem;
     const hours = details.tokens;
     const meals = details.meals;
@@ -70,19 +69,16 @@ const eventLogMapper = {
       orgPhoto,
       summary: (
         <Fragment>
-          { contributorLink } helped { hours } people
-          { meals ? ` and provided ${meals} meals ` : '' }
-          { " " }
-          with { organisationLink }
-          { " " }
+          {contributorLink} helped {hours} people
+          {meals ? ` and provided ${meals} meals ` : ""} with {organisationLink}{" "}
           (Approved)
         </Fragment>
       ),
       date: timeSince(dateCreated),
-      extra: description
+      extra: description,
     };
   },
-  REQUEST_TOKENS: eventItem => {
+  REQUEST_TOKENS: (eventItem) => {
     const { docId: id, details, dateCreated } = eventItem;
     const hours = details.loggedHours;
     const meals = details.mealsProvided;
@@ -105,39 +101,32 @@ const eventLogMapper = {
       userPhoto,
       summary: (
         <Fragment>
-          { contributorLink } helped { hours } people
-          { meals ? ` and provided ${ meals } meals ` : '' }
-          { " " }
-          with { organisationLink }
-          { " " }
+          {contributorLink} helped {hours} people
+          {meals ? ` and provided ${meals} meals ` : ""} with {organisationLink}{" "}
           (Pending approval)
         </Fragment>
       ),
       date: timeSince(dateCreated),
-      extra: description
+      extra: description,
     };
-  }
+  },
 };
 
-const getImageSize = ( image, size ) => {
-  if ( !image ) {
+const getImageSize = (image, size) => {
+  if (!image) {
     return null;
   }
 
   const sizes = {
-    square_sm: '200x200',
-    square_md: '400x400',
-    letter_md: '600x400',
-    letter_lg: '1200x800',
-  }
+    square_sm: "200x200",
+    square_md: "400x400",
+    letter_md: "600x400",
+    letter_lg: "1200x800",
+  };
 
-  const sizeString = sizes[ size ] || sizes.letter_lg;
+  const sizeString = sizes[size] || sizes.letter_lg;
 
-  return image.replace( /(\.(jpe?g|png|gif|tiff|bmp))/, `_${ sizeString }$1` );
-}
+  return image.replace(/(\.(jpe?g|png|gif|tiff|bmp))/, `_${sizeString}$1`);
+};
 
-export {
-  timeSince,
-  eventLogMapper,
-  getImageSize,
-}
+export { timeSince, eventLogMapper, getImageSize };

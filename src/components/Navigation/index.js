@@ -12,14 +12,14 @@ const NonAuthMenuItems = () => (
     <Menu.Item exact as={NavLink} to={routes.HOME_PAGE}>
       Homepage
     </Menu.Item>
-    <Menu.Item as={ NavLink } to={ routes.ABOUT_PAGE }>
+    <Menu.Item as={NavLink} to={routes.ABOUT_PAGE}>
       About
     </Menu.Item>
     <Menu.Item as={NavLink} to={routes.SIGN_IN}>
       Sign in
     </Menu.Item>
     <Menu.Item position="right" fitted>
-      <NavLink to={ routes.SIGN_UP } >
+      <NavLink to={routes.SIGN_UP}>
         <Button fluid primary>
           Sign up
         </Button>
@@ -28,7 +28,7 @@ const NonAuthMenuItems = () => (
   </Fragment>
 );
 
-const AuthMenuItems = props => {
+const AuthMenuItems = (props) => {
   const isAdmin = props.user.role === "ADMIN";
 
   return (
@@ -36,7 +36,7 @@ const AuthMenuItems = props => {
       <Menu.Item exact as={NavLink} to={routes.HOME_PAGE}>
         Homepage
       </Menu.Item>
-      <Menu.Item as={ NavLink } to={ routes.ABOUT_PAGE }>
+      <Menu.Item as={NavLink} to={routes.ABOUT_PAGE}>
         About
       </Menu.Item>
       <Menu.Item as={NavLink} to={routes.ADD_HRS}>
@@ -61,7 +61,7 @@ const AuthMenuItems = props => {
 
 const MenuItems = () => (
   <FirebaseAuthUserContext.Consumer>
-    {user =>
+    {(user) =>
       user.isUserSignedIn && !user.pendingUser ? (
         <AuthMenuItems user={user} />
       ) : (
@@ -71,7 +71,7 @@ const MenuItems = () => (
   </FirebaseAuthUserContext.Consumer>
 );
 
-const SidebarMenu = props => (
+const SidebarMenu = (props) => (
   <Sidebar
     as={Menu}
     animation="overlay"
@@ -92,7 +92,7 @@ const BarMenu = () => (
 
 class ResponsiveNavigation extends React.Component {
   state = {
-    sidebarActive: false
+    sidebarActive: false,
   };
 
   componentDidUpdate(prevProps) {
@@ -101,7 +101,7 @@ class ResponsiveNavigation extends React.Component {
   }
 
   handleButtonClick = () =>
-    this.setState(prevState => ({ sidebarActive: !prevState.sidebarActive }));
+    this.setState((prevState) => ({ sidebarActive: !prevState.sidebarActive }));
 
   hideSidebar = () => this.setState({ sidebarActive: false });
 

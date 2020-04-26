@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const AuthUserContext = React.createContext({
-    id: null,
-    email: null
+  id: null,
+  email: null,
 });
 
 export default AuthUserContext;

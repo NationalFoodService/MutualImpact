@@ -5,26 +5,26 @@ import { firebase, db } from "../../firebase";
 const defaultUserContext = {
   pendingAuth: true,
   pendingUser: true,
-  isUserSignedIn: false
+  isUserSignedIn: false,
 };
 
 export const FirebaseAuthUserContext = React.createContext(defaultUserContext);
 
 export default class FirebaseAuthUserProvider extends React.Component {
   state = {
-    ...defaultUserContext
+    ...defaultUserContext,
   };
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(user => {
+    firebase.auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState(() => ({
           pendingAuth: false,
           isUserSignedIn: true,
           id: user.uid,
-          email: user.email
+          email: user.email,
         }));
-        db.getUser(user.uid).then(user => {
+        db.getUser(user.uid).then((user) => {
           let role = user.role || "USER";
           this.setState({
             pendingUser: false,
@@ -32,7 +32,7 @@ export default class FirebaseAuthUserProvider extends React.Component {
             hours: user.hours,
             meals: user.meals || 0,
             photo: user.photo || "",
-            role
+            role,
           });
         });
       } else {

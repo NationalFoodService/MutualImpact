@@ -11,19 +11,19 @@ const INITIAL_STATE = {
   description: "",
   error: null,
   loading: false,
-  users: []
+  users: [],
 };
 
 class SendHrsToUser extends Component {
   state = {
-    ...INITIAL_STATE
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {
     db.getUsers()
-      .then(users => users.filter(user => user.id !== this.props.user.id))
-      .then(users => this.setState({ users, loading: false }))
-      .catch(error => console.log(error));
+      .then((users) => users.filter((user) => user.id !== this.props.user.id))
+      .then((users) => this.setState({ users, loading: false }))
+      .catch((error) => console.log(error));
   }
 
   validate = () => {
@@ -43,7 +43,7 @@ class SendHrsToUser extends Component {
       .then(() => this.setState({ ...INITIAL_STATE }))
       .then(() => this.setState({ success: true }))
       .then(() => console.log("Transaction successful"))
-      .catch(error => this.setState({ error }))
+      .catch((error) => this.setState({ error }))
       .then(() => this.setState({ loading: false }));
   };
 
@@ -103,9 +103,9 @@ class SendHrsToUser extends Component {
   }
 }
 
-const SendHrsToUserWithAuthUser = props => (
+const SendHrsToUserWithAuthUser = (props) => (
   <FirebaseAuthUserContext.Consumer>
-    {user => <SendHrsToUser user={user} />}
+    {(user) => <SendHrsToUser user={user} />}
   </FirebaseAuthUserContext.Consumer>
 );
 

@@ -4,7 +4,7 @@ import { Grid, Button } from "semantic-ui-react";
 
 import withAuthorization from "../Session/withAuthorization";
 import * as routes from "../../constants/routes";
-import ManageOrganisations from './ManageOrganisations';
+import ManageOrganisations from "./ManageOrganisations";
 
 const AdminPage = () => (
   <Grid padded columns={2}>
@@ -28,5 +28,5 @@ const AdminPage = () => (
   </Grid>
 );
 
-const authCondition = user => user.role === "ADMIN";
+const authCondition = (user) => user.role === "ADMIN";
 export default withAuthorization(authCondition)(AdminPage);

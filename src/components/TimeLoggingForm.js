@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "./TimeLoggingForm.css";
 import { Form, Button, Message, List } from "semantic-ui-react";
-import ImageUpload from './Forms/ImageUpload';
+import ImageUpload from "./Forms/ImageUpload";
 
 import { db } from "../firebase";
 import { token } from "../firebase";
@@ -22,7 +21,7 @@ class TimeLoggingForm extends Component {
     super(props);
     this.state = {
       fields: {
-        ...INITIAL_FIELDS
+        ...INITIAL_FIELDS,
       },
       organisations: [],
       loading: true,
@@ -35,10 +34,10 @@ class TimeLoggingForm extends Component {
   }
 
   componentDidMount() {
-    db.getOrganisations().then(organisations => {
+    db.getOrganisations().then((organisations) => {
       this.setState({
         organisations,
-        loading: false
+        loading: false,
       });
     });
   }
@@ -49,20 +48,27 @@ class TimeLoggingForm extends Component {
       .then(() =>
         this.setState({ success: true, fields: { ...INITIAL_FIELDS } })
       )
-      .catch(error => this.setState({ error }))
+      .catch((error) => this.setState({ error }))
       .then(() => this.setState({ submitting: false }));
   };
 
   logHours = () => {
-    var { task, orgIndex, time, meals, dateOfLabour, photo = '' } = this.state.fields;
-    const org = this.state.organisations[ orgIndex ];
+    var {
+      task,
+      orgIndex,
+      time,
+      meals,
+      dateOfLabour,
+      photo = "",
+    } = this.state.fields;
+    const org = this.state.organisations[orgIndex];
 
     return token.requestTokens(org, this.props.user, {
       loggedHours: time,
       mealsProvided: meals,
       description: task,
       photo,
-      dateOfLabour
+      dateOfLabour,
     });
   };
 
@@ -72,12 +78,12 @@ class TimeLoggingForm extends Component {
     this.setState({ fields });
   };
 
-  validateTime = time => {
+  validateTime = (time) => {
     const hours = Number(time);
     return hours > 0 && hours < 1500;
   };
 
-  validateDate = dateString => {
+  validateDate = (dateString) => {
     const MILLIS_IN_MONTH = 2678400000;
     const loggedDate = new Date(dateString);
     const today = new Date();
@@ -89,7 +95,7 @@ class TimeLoggingForm extends Component {
   };
 
   validate = () => {
-    const isSome = x => x !== null && x !== "";
+    const isSome = (x) => x !== null && x !== "";
     const fields = { ...this.state.fields };
     // Remove optional fields.
     delete fields.photo;
@@ -103,7 +109,7 @@ class TimeLoggingForm extends Component {
   render() {
     const orgOptions = this.state.organisations.map((org, i) => ({
       text: org.name,
-      value: i
+      value: i,
     }));
 
     return (
@@ -143,8 +149,7 @@ class TimeLoggingForm extends Component {
           onChange={this.onFormChange}
         />
         <p>
-          Not there?
-          { " " }
+          Not there?{" "}
           <a href="https://forms.gle/KXQPG6gcuQsPSFXdA"> Add your group.</a>
         </p>
         <Form.Input
@@ -170,11 +175,20 @@ class TimeLoggingForm extends Component {
         />
         <ImageUpload
           label="Upload a photo (optional)"
-          onUpload={ photo => this.setState( { isUploading: false, fields: { ...this.state.fields, photo } } ) }
+          onUpload={(photo) =>
+            this.setState({
+              isUploading: false,
+              fields: { ...this.state.fields, photo },
+            })
+          }
           prefix="log"
-          image={ this.state.fields.photo }
-          onStart={ () => this.setState({ isUploading: true, uploadError: false }) }
-          onError={ error => this.setState({ isUploading: false, uploadError: error }) }
+          image={this.state.fields.photo}
+          onStart={() =>
+            this.setState({ isUploading: true, uploadError: false })
+          }
+          onError={(error) =>
+            this.setState({ isUploading: false, uploadError: error })
+          }
         />
         <Message
           error
@@ -202,9 +216,9 @@ class TimeLoggingForm extends Component {
 
 const TimeLoggingFormWithUser = () => (
   <FirebaseAuthUserContext.Consumer>
-    {user => <TimeLoggingForm user={user} />}
+    {(user) => <TimeLoggingForm user={user} />}
   </FirebaseAuthUserContext.Consumer>
 );
 
-const authCondition = user => user !== null;
+const authCondition = (user) => user !== null;
 export default withAuthorization(authCondition)(TimeLoggingFormWithUser);
