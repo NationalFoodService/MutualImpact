@@ -15,7 +15,8 @@ import { FirebaseAuthUserContext } from "./Session/FirebaseAuthUserProvider";
 const infoPanes = [
   {
     header: `Mutual impact`,
-    text: `Mutual impact is a web app for groups to post impact at the end of the day or week. Having more information during COVID-19 gives each group more context, which helps us carry out work more effectively. It also supports researchers to compile evidence for to government to unlock support.`,
+    text: `Mutual impact is an impact tracker for the National Food Service and partnering mutual community groups to collect vital evidence to demonstrate impact as a whole.  This allows accessiblity and transparency. During COVID-19 we are using it to paint a picture to the public, researchers, Local Authorities and funders. In turn this can enable more support for work. It also aims to remove some administrative burden and enable automatic reporting for researchers and grant funders.
+Aswell as increasing the total evidence base for Mutual Aid and voluntary labor.`,
     image: aboutUs,
   },
   {
