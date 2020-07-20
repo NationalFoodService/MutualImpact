@@ -8,7 +8,7 @@
     "history": "^4.7.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.7",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "prettier": "^2.0.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
